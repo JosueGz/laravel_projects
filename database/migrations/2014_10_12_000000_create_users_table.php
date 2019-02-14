@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('type');// admin or user
             $table->tinyInteger('status');//status for user :active  or disabled
-            $table->rememberToken();
+            $table->rememberToken();//
             $table->timestamps();
         });
     }
