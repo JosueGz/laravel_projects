@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Document;
+use Storage;
 
 class DocumentController extends Controller
 {
@@ -36,12 +37,12 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-         
+         dd($request->all());
       $this->validate($request, [
             'photo' => 'required|image',
             'name' => 'required|max:255',
             'lastname' => 'required|max:255',
-            'birthdate' => 'required',
+            'birthdate' => 'required|date',
             'address' => 'required|max:255',
             'email' => 'required|unique:users,email',
             'telephone' => 'required',
@@ -52,17 +53,19 @@ class DocumentController extends Controller
         $pas = 'secret';
         $request->merge(['password' => bcrypt($pas)]);
         $request->merge(['status' => 1]);
-        $registro = User::create($request->all());
         $path = $request->file('photo')->store('avatars');
+        $registro = User::create($request->all());
 
-        dd($path);
+        
+        //$path = Storage::putFile('avatars', $request->file('photo'));
+      
 
 
         //Creacion de Solicitud
         $request->merge(['user_id' => $registro -> id]);
         $request->merge(['password' => $pas]);
         Document::create($request->all());
-
+        dd($request->all());
 
 
         return redirect()->back()->with('success', 'Registro creado correctamente');

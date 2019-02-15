@@ -17,7 +17,7 @@
                  </div>
                 @endif
 
-                    <form method="POST" action="{{ route('documents.store') }}">
+                    <form method="POST" action="{{ route('documents.store') }}" enctype="multipart/form-data">
                         @csrf
 
 
