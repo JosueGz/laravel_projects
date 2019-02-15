@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->tinyInteger('type');// admin or user
+            $table->tinyInteger('role')->default('2');// admin or user
             $table->tinyInteger('status');//status for user :active  or disabled
             $table->rememberToken();//
             $table->timestamps();

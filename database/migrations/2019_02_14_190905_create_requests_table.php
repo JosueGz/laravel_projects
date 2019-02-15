@@ -13,19 +13,20 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('document')->unique();
-            $table->string('photo');
+            $table->string('last_document')->default('');
+            $table->string('photo')->default('');
             $table->string('name');
             $table->string('lastname');
-            $table->date('date');
+            $table->date('birthdate');
             $table->text('address');
-            $table->integer('telephone')->unsigned();
-            $table->string('department')
+            $table->integer('telephone');
+            $table->string('department');
             $table->string('municipality');
-            $table->tinyInteger('status');//status for request :solicitado:en proceso:listo para entrega;
-            $table->integer('id_user');
+            $table->tinyInteger('status')->default('1');//status for request :solicitado:en proceso:listo para entrega;
+            $table->integer('user_id');
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });

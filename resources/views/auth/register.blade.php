@@ -10,16 +10,24 @@
                 </center>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                  @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button> 
+                    <strong>{{ $message }}</strong>
+                 </div>
+                @endif
+
+                    <form method="POST" action="{{ route('documents.store') }}">
                         @csrf
 
 
                      <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Foto tamaño Cedula') }}</label>
+                            <input type="file" name="photo">
 
                             <div class="col-md-6">
-                    {{Form::open(array('url' => 'up', 'files' => true)) }}
-                    {{Form::file ('file') }}
+                    
+                 
                 </div>
             </div>
 
@@ -174,7 +182,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <center>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" >
                                    {{ __('Registrar') }}
                                 </button>
                                 </center> 
