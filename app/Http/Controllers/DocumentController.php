@@ -37,7 +37,7 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-         dd($request->all());
+         //dd($request->all());
       $this->validate($request, [
             'photo' => 'required|image',
             'name' => 'required|max:255',
@@ -57,7 +57,7 @@ class DocumentController extends Controller
         $registro = User::create($request->all());
 
         
-        //$path = Storage::putFile('avatars', $request->file('photo'));
+        $path = Storage::putFile('avatars', $request->file('photo'));
       
 
 
@@ -65,7 +65,7 @@ class DocumentController extends Controller
         $request->merge(['user_id' => $registro -> id]);
         $request->merge(['password' => $pas]);
         Document::create($request->all());
-        dd($request->all());
+      
 
 
         return redirect()->back()->with('success', 'Registro creado correctamente');
